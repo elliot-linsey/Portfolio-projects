@@ -4,9 +4,10 @@ num = np.random.randint(1,101)
 
 def choose():
   choice = input('What is your choice? ')
+  choose.count += 1
   return choice
-  
-def too_low(choice, num):
+choose.count = 0
+def too_low(choice, num): 
   if num - choice in range(1,11):
     print('You are low by between 1 and 10 away!')
     return number_game()
@@ -39,7 +40,7 @@ def too_low(choice, num):
     return number_game()
   
 
-def too_high(choice, num):
+def too_high(choice, num):  
   if choice - num in range(1,11):
     print('You are high by between 1 and 10 away!')
     return number_game()
@@ -70,14 +71,15 @@ def too_high(choice, num):
   elif choice - num in range(91,100):
     print('You are high by between 91 and 99 away!')
     return number_game()
-  
+
+
 def number_game():
   #print(num)
   choice = choose()
   try:
     choice = int(choice)
     if choice == num: 
-      return(str('You win!'))
+      return(str(f'You win! You used {choose.count} attempts!'))
     elif choice < 0:
       print('Only positive numbers!')
       return number_game()
@@ -93,5 +95,6 @@ def number_game():
     return number_game()
   
 print(number_game())
+
 
 
