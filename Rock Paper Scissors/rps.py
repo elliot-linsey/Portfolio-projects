@@ -1,4 +1,5 @@
 import numpy as np 
+import sys
 
 def lst_reset():
   lst_reset.lst = ['r', 'p', 's']
@@ -7,13 +8,11 @@ lst_reset.lst = ['r', 'p', 's']
 
 def u_choice():
   ch = input('What is your choice? ')
-  if ch in lst_reset.lst:
-    lst_reset.lst.remove(ch)
-  elif ch == 'exit':
-    return
-  else:
+  if ch == 'exit':
+    sys.exit('Goodbye!')
+  elif ch not in lst_reset.lst:
     print('Not a valid choice!')
-    return rps()
+    return u_choice()
   return ch
 
 def c_choice():
@@ -29,7 +28,12 @@ def rps():
  u_ch = u_choice()
  c_ch = c_choice()
  print(f'Computer choice: {c_ch}')
- if u_ch == 'r' and c_ch == 's':
+ if u_ch == c_ch:
+   print('You drew!')
+   print(f'User score = {rps.u_count}')
+   print(f'Computer score = {rps.c_count}')
+   return rps()
+ elif u_ch == 'r' and c_ch == 's':
    rps.u_count += 1
    print(f'User score = {rps.u_count}')
    print(f'Computer score = {rps.c_count}')
